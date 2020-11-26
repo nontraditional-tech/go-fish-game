@@ -4,7 +4,8 @@
 
 int main()
 {
-	printf("hello fish\n");
-	build_deck();
+	Deck deck;
+	build_deck(&deck);
+	print_array_of_cards(deck.fresh_deck);
 }
 

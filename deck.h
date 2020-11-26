@@ -4,8 +4,11 @@
 
 #define DECK_MAX	52
 
+typedef struct {
+	
+	Card fresh_deck[DECK_MAX];
+} Deck;
 
-Card deck[DECK_MAX];
 
-
-void build_deck();
+void build_deck(Deck* deck);
+void print_array_of_cards(const Card* array);
