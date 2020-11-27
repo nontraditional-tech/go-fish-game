@@ -6,6 +6,8 @@ int main()
 {
 	Deck deck;
 	build_deck(&deck);
-	print_array_of_cards(deck.fresh_deck);
+	shuffle_deck(&deck);
+	print_array_of_cards(deck.shuffled_deck);
+
 }
 

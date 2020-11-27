@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "deck.h"
+
 
 void build_deck(Deck* deck)
 {
@@ -26,4 +28,28 @@ void print_array_of_cards(const Card* array)
 		printf("\n");
 	}
 }
+ 
+void shuffle_deck(Deck* deck) 
+{
+	int selected_num_array[52] = {0};
+	int transfer_counter = 0;
+	int iterator = 0;
+	srand(time(NULL));
+	
+	while (transfer_counter < DECK_MAX) {
+		int r = rand() % 52;
+		if (selected_num_array[r] != 1) {
+			selected_num_array[r] = 1;
+			deck->shuffled_deck[iterator].card_num = 
+						deck->fresh_deck[r].card_num;
+			deck->shuffled_deck[iterator].value = 
+						deck->fresh_deck[r].value;
+			deck->shuffled_deck[iterator].suit = 
+						deck->fresh_deck[r].suit;
+			iterator++;
+			transfer_counter++;
+		}	
+	} 
+}
+
 	

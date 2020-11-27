@@ -7,8 +7,10 @@
 typedef struct {
 	
 	Card fresh_deck[DECK_MAX];
+	Card shuffled_deck[DECK_MAX];
 } Deck;
 
 
 void build_deck(Deck* deck);
 void print_array_of_cards(const Card* array);
+void shuffle_deck(Deck* deck);
