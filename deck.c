@@ -4,52 +4,85 @@
 #include "deck.h"
 
 
-void build_deck(Deck* deck)
+// linked list head pointer
+static struct Game_Deck_Node* head_ptr = NULL;
+// Deck global variable
+static Deck deck;
+
+
+static void push_card_to_gamedeck_ll(int index)
+{
+	int random_num = -1;
+	struct Game_Deck_Node* new_node = malloc(sizeof(struct Game_Deck_Node));
+	random_num = deck.shuffled_deck_int_array[index];
+	new_node->card.card_num = deck.fresh_deck[random_num].card_num;
+	new_node->card.value = deck.fresh_deck[random_num].value;
+	new_node->card.suit = deck.fresh_deck[random_num].suit;
+	new_node->next_card_ptr = head_ptr;
+	head_ptr = new_node;
+}
+
+void build_shuffled_gamedeck_ll()
+{
+	for (int i=0; i<DECK_MAX; i++)
+	{
+		push_card_to_gamedeck_ll(i);
+	}
+
+}
+/* builds deck in sequential order, stores in fresh_deck array */
+void build_unshuffled_deck()
 {
 	int card_iter = 1;
 	int deck_iter = 0;
 	for (int i=0; i<SUIT_MAX; i++) {
 		for (int j=0; j<VALUE_MAX; j++) {
-			deck->fresh_deck[deck_iter].card_num = card_iter;
-			deck->fresh_deck[deck_iter].value = j;
-			deck->fresh_deck[deck_iter].suit= i;
+			deck.fresh_deck[deck_iter].card_num = card_iter;
+			deck.fresh_deck[deck_iter].value = j;
+			deck.fresh_deck[deck_iter].suit= i;
 			deck_iter++;
 			card_iter++;
 		} 
 	}
 }
 
-void print_array_of_cards(const Card* array)
+/* prints fresh_deck array and all card members */ 
+void print_unshuffled_deck()
 {
 	for (int index=0; index<DECK_MAX; index++) {
-		printf("Card No: %d\n", array[index].card_num);
-		printf("Value: %d\n", array[index].value);
-		printf("Suit: %d\n", array[index].suit);
+		printf("Card No: %d\n", deck.fresh_deck[index].card_num);
+		printf("Value: %d\n", deck.fresh_deck[index].value);
+		printf("Suit: %d\n", deck.fresh_deck[index].suit);
 		printf("\n");
 	}
 }
  
-void shuffle_deck(Deck* deck) 
+/* builds the int array of random, nonrepeating values, 
+ * to build shuffled deck linked list 
+ */
+void build_shuffled_deck_int_array() 
 {
 	int selected_num_array[52] = {0};
-	int transfer_counter = 0;
 	int iterator = 0;
 	srand(time(NULL));
 	
-	while (transfer_counter < DECK_MAX) {
+	while (iterator < DECK_MAX) {
 		int r = rand() % 52;
 		if (selected_num_array[r] != 1) {
 			selected_num_array[r] = 1;
-			deck->shuffled_deck[iterator].card_num = 
-						deck->fresh_deck[r].card_num;
-			deck->shuffled_deck[iterator].value = 
-						deck->fresh_deck[r].value;
-			deck->shuffled_deck[iterator].suit = 
-						deck->fresh_deck[r].suit;
+			deck.shuffled_deck_int_array[iterator] = r;
 			iterator++;
-			transfer_counter++;
 		}	
 	} 
 }
 
-	
+/* prints array of random nonrepeating values */
+void print_int_array() 
+{
+	for (int index=0; index<DECK_MAX; index++) {
+		printf("Int No: %d\n", deck.shuffled_deck_int_array[index]);
+		printf("\n");
+	}
+}
+
+
