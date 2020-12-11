@@ -10,6 +10,17 @@ static struct Game_Deck_Node* head_ptr = NULL;
 static Deck deck;
 
 
+void print_gamedeck_ll() 
+{
+	struct Game_Deck_Node* current = head_ptr;
+	while (current != NULL) {
+		printf("Card Num: %d\n", current->card.card_num);
+		printf("Card Value: %d\n", current->card.value);
+		printf("Card Suit: %d\n\n", current->card.suit);
+		current = current->next_card_ptr;
+	}
+} 
+
 static void push_card_to_gamedeck_ll(int index)
 {
 	int random_num = -1;
@@ -81,7 +92,6 @@ void print_int_array()
 {
 	for (int index=0; index<DECK_MAX; index++) {
 		printf("Int No: %d\n", deck.shuffled_deck_int_array[index]);
-		printf("\n");
 	}
 }
 
