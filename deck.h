@@ -25,3 +25,5 @@ void build_shuffled_deck_int_array();
 void print_int_array();
 void build_shuffled_gamedeck_ll();
 void print_gamedeck_ll();
+void print_card_value_name(int value);
+void print_card_suit_name(int suit);

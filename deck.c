@@ -16,10 +16,26 @@ void print_gamedeck_ll()
 	while (current != NULL) {
 		printf("Card Num: %d\n", current->card.card_num);
 		printf("Card Value: %d\n", current->card.value);
-		printf("Card Suit: %d\n\n", current->card.suit);
+		print_card_value_name(current->card.value);
+		printf("Card Suit: %d\n", current->card.suit);
+		print_card_suit_name(current->card.suit);
 		current = current->next_card_ptr;
 	}
 } 
+
+void print_card_value_name(int value)
+{
+	char* value_array[] = {"TWO", "THREE", "FOUR", "FIVE", "SIX", 
+			       "SEVEN", "EIGHT", "NINE", "TEN", "JACK", 
+			       "QUEEN", "KING", "ACE"};
+	printf("Card Value Name: %s\n", value_array[value]);
+}
+
+void print_card_suit_name(int suit)
+{
+	char* suit_array[] = {"DIAMONDS", "HEARTS", "CLUBS", "SPADES"}; 
+	printf("Card Suit Name: %s\n\n", suit_array[suit]);
+}
 
 static void push_card_to_gamedeck_ll(int index)
 {

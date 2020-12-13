@@ -9,8 +9,6 @@ int main()
 	build_shuffled_gamedeck_ll();
 	print_gamedeck_ll();
 
-	// 1. write get card value function
-	// 2. write get card suit function
 	// 3. write game setup functionality    (CAN NAME THIS DEALER STRUCT)
 	// 	a. write set up for game players
 	// 	b. write functionality to determine who goes first / 
