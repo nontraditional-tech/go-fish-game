@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
-DEPS = card.h deck.h
-OBJ = main.o deck.o
+DEPS = card.h dealer.h
+OBJ = main.o dealer.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

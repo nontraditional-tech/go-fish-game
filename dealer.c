@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "deck.h"
+#include "dealer.h"
 
 
 // linked list head pointer
@@ -10,20 +10,14 @@ static struct Game_Deck_Node* head_ptr = NULL;
 static Deck deck;
 
 
-void print_gamedeck_ll() 
-{
-	struct Game_Deck_Node* current = head_ptr;
-	while (current != NULL) {
-		printf("Card Num: %d\n", current->card.card_num);
-		printf("Card Value: %d\n", current->card.value);
-		print_card_value_name(current->card.value);
-		printf("Card Suit: %d\n", current->card.suit);
-		print_card_suit_name(current->card.suit);
-		current = current->next_card_ptr;
-	}
-} 
 
-void print_card_value_name(int value)
+
+/****	Private Dealer functions	********/
+
+
+/* Will print value name of card based on value (int) from 
+ * Card argument */
+static void print_card_value_name(int value)
 {
 	char* value_array[] = {"TWO", "THREE", "FOUR", "FIVE", "SIX", 
 			       "SEVEN", "EIGHT", "NINE", "TEN", "JACK", 
@@ -31,12 +25,19 @@ void print_card_value_name(int value)
 	printf("Card Value Name: %s\n", value_array[value]);
 }
 
-void print_card_suit_name(int suit)
+
+/* Will print suit name of card based on suit (int) from 
+ * Card argument */
+static void print_card_suit_name(int suit)
 {
 	char* suit_array[] = {"DIAMONDS", "HEARTS", "CLUBS", "SPADES"}; 
 	printf("Card Suit Name: %s\n\n", suit_array[suit]);
 }
 
+
+/* function will malloc and push new card node to the beginning of 
+ * linked list. Each push is a random card based on 
+ * shuffled_deck_int_array[index] */
 static void push_card_to_gamedeck_ll(int index)
 {
 	int random_num = -1;
@@ -49,7 +50,10 @@ static void push_card_to_gamedeck_ll(int index)
 	head_ptr = new_node;
 }
 
-void build_shuffled_gamedeck_ll()
+
+/* function will build a shuffled deck linked list using 
+ * private function push_card_to_gamedeck() */
+static void build_shuffled_gamedeck_ll()
 {
 	for (int i=0; i<DECK_MAX; i++)
 	{
@@ -57,8 +61,10 @@ void build_shuffled_gamedeck_ll()
 	}
 
 }
+
+
 /* builds deck in sequential order, stores in fresh_deck array */
-void build_unshuffled_deck()
+static void build_unshuffled_deck()
 {
 	int card_iter = 1;
 	int deck_iter = 0;
@@ -73,17 +79,7 @@ void build_unshuffled_deck()
 	}
 }
 
-/* prints fresh_deck array and all card members */ 
-void print_unshuffled_deck()
-{
-	for (int index=0; index<DECK_MAX; index++) {
-		printf("Card No: %d\n", deck.fresh_deck[index].card_num);
-		printf("Value: %d\n", deck.fresh_deck[index].value);
-		printf("Suit: %d\n", deck.fresh_deck[index].suit);
-		printf("\n");
-	}
-}
- 
+
 /* builds the int array of random, nonrepeating values, 
  * to build shuffled deck linked list 
  */
@@ -103,12 +99,48 @@ void build_shuffled_deck_int_array()
 	} 
 }
 
-/* prints array of random nonrepeating values */
+
+
+/****	public Dealer API functions	********/
+
+
+void setup_game()
+{
+	build_unshuffled_deck();
+	build_shuffled_deck_int_array();
+	build_shuffled_gamedeck_ll();
+}
+
+
+void print_gamedeck_ll() 
+{
+	struct Game_Deck_Node* current = head_ptr;
+	while (current != NULL) {
+		printf("Card Num: %d\n", current->card.card_num);
+		printf("Card Value: %d\n", current->card.value);
+		print_card_value_name(current->card.value);
+		printf("Card Suit: %d\n", current->card.suit);
+		print_card_suit_name(current->card.suit);
+		current = current->next_card_ptr;
+	}
+} 
+
+
+void print_unshuffled_deck()
+{
+	for (int index=0; index<DECK_MAX; index++) {
+		printf("Card No: %d\n", deck.fresh_deck[index].card_num);
+		printf("Value: %d\n", deck.fresh_deck[index].value);
+		printf("Suit: %d\n", deck.fresh_deck[index].suit);
+		printf("\n");
+	}
+}
+
+
 void print_int_array() 
 {
 	for (int index=0; index<DECK_MAX; index++) {
 		printf("Int No: %d\n", deck.shuffled_deck_int_array[index]);
 	}
 }
-
 
