@@ -18,6 +18,16 @@ struct Game_Deck_Node{
 
 /* struct for deck operations */
 typedef struct {
+	// stores number of players in current game
+	int player_num;
+	// stores player_id that has current turn
+	int player_id_turn;
+
+
+	/* WILL NEED AN ARRAY OF PLAYERS, NOT SURE HOW TO 
+	 * IMPLEMENT YET */
+
+
 	/* fresh deck for game initially built here 
 	 * not used after deck is shuffled and moved to 
 	 * linked list */

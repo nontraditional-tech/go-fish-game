@@ -16,24 +16,6 @@ int main()
 	// 	b. write functionality to determine who goes first / 
 	// 	   gets to cut the deck
 	//
-	//	player struct 
-	//		int player_id
-	//		bool player_turn	// must use <stdbool.h>
-	//		/* SOME KIND OF STRUCTURE THING FOR EACH 
-	//		   PLAYERS HAND (LINKED LIST) */
-	//		/* player hand hear ptr maybe */
-	//
-	//
-	//
-	//	dealer struct
-	//		int player_num
-	//		int player_id_turn	// might not need this
-	//		/* an array of players, not sure how i'm 
-	//		   gonna do this yet */
-	//		
-	//
-	//
-	//
 	// 	c. write functionality to cut the card deck
 	// 4. write card dealing functionality
 	// 5. write some kind of way to display each players hand

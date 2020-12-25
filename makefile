@@ -8,3 +8,25 @@ OBJ = main.o dealer.o
 
 go-fish-game: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
